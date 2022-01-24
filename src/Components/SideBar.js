@@ -3,8 +3,10 @@ import { RiHome8Fill,RiStore2Fill,RiMessage2Fill,RiShoppingCart2Fill } from "rea
 import { IoPeopleSharp } from "react-icons/io5";
 import { VscFeedback } from "react-icons/vsc";
 import { FaHistory } from "react-icons/fa";
-import { MdBusiness } from "react-icons/md";
-import '../css/Style.css'
+import { AiFillCar } from "react-icons/ai";
+import {BiMoney} from 'react-icons/bi';
+import {GiStorkDelivery} from 'react-icons/gi';
+import '../Css/Style.css'
 import {
     CDBSidebar,
     CDBSidebarContent,
@@ -37,7 +39,7 @@ export default class SideBar extends Component {
                                 <CDBSidebarMenuItem ><span className="sideIcon"><RiHome8Fill/></span>Home</CDBSidebarMenuItem>
                             </NavLink>
                             <NavLink exact to="/commande" activeClassName="activeClicked">
-                                <CDBSidebarMenuItem><span className="sideIcon"><RiMessage2Fill/></span>Commandes</CDBSidebarMenuItem>
+                                <CDBSidebarMenuItem><span className="sideIcon"><GiStorkDelivery/></span>Commandes</CDBSidebarMenuItem>
                             </NavLink>
                             <NavLink exact to="/livreur" activeClassName="activeClicked">
                                 <CDBSidebarMenuItem><span className="sideIcon"><IoPeopleSharp/></span>Livreurs</CDBSidebarMenuItem>
@@ -49,14 +51,14 @@ export default class SideBar extends Component {
                                 <CDBSidebarMenuItem><span className="sideIcon"><IoPeopleSharp/></span>Responsabe de livraison</CDBSidebarMenuItem>
                             </NavLink>
                             <NavLink exact to="/vehicule" activeClassName="activeClicked">
-                                <CDBSidebarMenuItem ><span className="sideIcon"><VscFeedback/></span>Vehicule</CDBSidebarMenuItem>
+                                <CDBSidebarMenuItem ><span className="sideIcon"><AiFillCar/></span>Vehicule</CDBSidebarMenuItem>
+                            </NavLink>
+                            <NavLink exact to="/prime" activeClassName="activeClicked">
+                                <CDBSidebarMenuItem ><span className="sideIcon"><BiMoney/></span>Prime</CDBSidebarMenuItem>
                             </NavLink>
                             <NavLink exact to="/historique" activeClassName="activeClicked">
                                 <CDBSidebarMenuItem ><span className="sideIcon"><FaHistory/></span>Historique</CDBSidebarMenuItem>
                             </NavLink>                            
-                            <NavLink exact to="/prime" activeClassName="activeClicked">
-                                <CDBSidebarMenuItem ><span className="sideIcon"><FaHistory/></span>Prime</CDBSidebarMenuItem>
-                            </NavLink>
                         </CDBSidebarMenu>
                     </CDBSidebarContent>
                 </CDBSidebar>

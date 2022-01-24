@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { IoEllipseSharp } from "react-icons/io5";
 import Stats from '../Components/Stats';
-import '../css/Style.css'
+import '../Css/Style.css'
 
 export default function Home() {
   return <div className="px-lg-4 px-xl-5 container-fluid">
