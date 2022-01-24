@@ -18,7 +18,12 @@ function Wrapper({Title, Breadcrumb}) {
             <div className="page-header d-flex justify-content-between align-items-center">
                 <h1 className="page-heading">{Title}</h1>
             </div>
-            <SearchBar />
+            <SearchBar
+                Title="Quesque tu cherche ?"
+                btn = "chercher"
+            />
+            
+            
         </div>
     )
 }

@@ -9,7 +9,7 @@ body {
 .Commande-bar h2{
     margin-left: 5%;
     margin-top: 3%;
-    color: #FEBD00;
+    color: #58508d;
     font-size: 30px;
     font-weight: 700;
 
@@ -59,7 +59,7 @@ body {
   }
 
   .btn-3 {
-    background: #FEBD00;
+    background: #003f5c;
     width: 130px;
     height: 40px;
     line-height: 42px;
@@ -79,7 +79,7 @@ body {
     content: "";
     right: 0;
     top: 0;
-     background: #FEBD00;
+     background: #003f5c;
     transition: all 0.3s ease;
   }
   .btn-3:before {
@@ -101,7 +101,7 @@ body {
     width: 100%;
   }
   .btn-3 span:hover{
-     color: #FEBD00;
+     color: #58508d;
   }
   .btn-3 span:before,
   .btn-3 span:after {
@@ -109,7 +109,7 @@ body {
     content: "";
     left: 0;
     bottom: 0;
-     background: #FEBD00;
+     background: #003f5c;
     transition: all 0.3s ease;
   }
   .btn-3 span:before {
@@ -154,13 +154,13 @@ body {
 
 .ellipse1{
     margin-top: -5px;
-    color: #FEBD00;
+    color: #00aeff;
     font-size: medium;
 }
 
 .ellipse2{
     margin-top: -8px;
-    color: #FEBD00;
+    color: #00aeff;
     font-size: xx-large;
 }
 

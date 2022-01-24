@@ -21,7 +21,7 @@ export default class SideBar extends Component {
     render() {
         return (
             <div
-                style={{ display: 'flex', overflow: 'scroll initial' }}
+                style={{ display: 'flex', overflow: 'scroll initial', height:'100vh' }}
             >
                 <CDBSidebar textColor="#fff" backgroundColor="#003f5c">
                     <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
