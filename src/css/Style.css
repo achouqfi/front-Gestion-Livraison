@@ -187,3 +187,31 @@ body {
 .form-control{
     height: 40px !important;
 }
+
+.btn-add{
+  background: #003f5c !important;
+  width: 130px !important;
+  height: 40px !important;
+  line-height: 42px !important;
+  padding: 0;
+  font-size: larger !important;
+  color: white !important;
+  font-weight: bold !important;
+  margin-left: 68% !important;
+}
+
+.btn-container{
+  width: 100vw;
+}
+
+.btn-ajout{
+  border: #003f5c 1px solid !important;
+  width: 100px !important;
+  height: 34px !important;
+  line-height: 42px !important;
+  padding: 0;
+  font-size: larger !important;
+  color: #003f5c !important;
+  font-weight: bold !important;
+  margin: 3% 2% 3% 62% !important;
+}
