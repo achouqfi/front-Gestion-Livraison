@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import '../Css/Style.css'
+import SearchBar from '../Components/Form'
 import Wrapper from '../Components/Wrapper';
 
 // Generate Order Data
@@ -71,6 +72,10 @@ function Comande() {
             <Wrapper
                 Title = "Commande"
                 Breadcrumb = "Commande" 
+            />
+            <SearchBar 
+                Title="Cherche une commande"
+                btn="Chercher"
             />
             <div className="card-table mb-4 card">
                 <div className="card-body">

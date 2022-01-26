@@ -1,5 +1,4 @@
 import React from 'react'
-import SearchBar from './Form'
 
 function Wrapper({Title, Breadcrumb}) {
     return (
@@ -17,13 +16,7 @@ function Wrapper({Title, Breadcrumb}) {
 
             <div className="page-header d-flex justify-content-between align-items-center">
                 <h1 className="page-heading">{Title}</h1>
-            </div>
-            <SearchBar
-                Title="Quesque tu cherche ?"
-                btn = "chercher"
-            />
-            
-            
+            </div>            
         </div>
     )
 }
