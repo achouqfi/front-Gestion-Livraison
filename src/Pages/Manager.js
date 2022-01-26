@@ -15,7 +15,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import '../Css/Style.css'
 import Wrapper from '../Components/Wrapper';
-import FormManager from '../Components/FormManager';
+import TextField from '@mui/material/TextField';
 import CancelIcon from '@mui/icons-material/Cancel';
 import axios from "axios"
 import SearchBar from '../Components/Form'
@@ -58,36 +58,91 @@ const Cells = ["id","email","name", "date de naissance"]
 function Manager() {
     const [open, setOpen] = React.useState(false);
     const [DOpen, setDOpen] = React.useState(false);
+    const [status, setStatus] = useState({ type: 'delete' });
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => (setOpen(false),
+        setStatus({ type: 'delete' }));
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [datenaissance, setDatenaissance] = useState("");
     // const deleteOpen = () => setDOpen(true);
     const deleteClose = () => (setDOpen(false),setStatus({ type: 'delete' }));
-    const [data , getData] = useState([]);
-    const [status, setStatus] = useState(undefined);
+    const [dataId,setdataId]=useState(null)
+    const [data , setData] = useState([]);
     const classes = useStyles()
 
-    function confirmationdelete(){
+    useEffect(() => {
+        getdata();
+    }, [])
+    
+    function confirmationdelete(id){
         setStatus({ type: 'confirm' });
         setDOpen(true)
+        setdataId(id)
     }
 
+    function getdata() {
+        axios("http://localhost:4000/api/manager/")
+        .then((result)=> {
+            setData(result.data)
+        })
+    }
 
-
-    const info = useEffect(() => {
-        axios.get("http://localhost:4000/api/manager/")
-            .then((response) => {
-                // console.log(response.data)
-                getData(response.data)
-                setStatus({ type: 'delete' });
-            });
-    },[]);
-
-    function deleteRow(id) {
+    function save(){
         axios
-            .delete(`http://localhost:4000/api/manager/${id}`)
+            .post(`http://localhost:4000/api/manager/add`,{
+                name:name,
+                email:email,
+                datenaissance:datenaissance
+            })
             .then(res=>{
-                info()
+                getdata()
+                handleClose()
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+    }
+
+    function deleteRow() {
+        console.log(dataId);
+        axios
+            .delete(`http://localhost:4000/api/manager/${dataId}`)
+            .then(res=>{
+                console.log(res);
                 setDOpen(false)
+                getdata()
+                setStatus({ type: 'delete' });
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+    }
+
+    function getManagerById(id){
+        axios
+            .get(`http://localhost:4000/api/manager/get/${id}`)
+            .then(res=>res.data.forEach(element => {
+                setName(element.name)
+                setEmail(element.email)
+                setDatenaissance(element.datenaissance);
+                handleOpen()
+                setdataId(element._id)
+
+            }))
+            .catch(err=>console.log(err))
+    }
+
+    function updateData(){
+        axios
+            .put(`http://localhost:4000/api/manager//${dataId}`,{
+                name:name,
+                email:email,
+                datenaissance:datenaissance
+            })
+            .then(res=>{
+                getdata()
+                handleClose()
             })
             .catch(err=>{
                 console.log(err)
@@ -118,7 +173,39 @@ function Manager() {
                     <Button onClick={handleClose}><CancelIcon style={{ color: '#003f5c',fontSize:'25px' , marginBottom:"13px" }} /></Button>
                 </div>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    <FormManager />
+                    <Box
+                        sx={{
+                        '& > :not(style)': { m: 1, width: '90%' },
+                        }}
+                        noValidate
+                        autoComplete="off"
+                    >
+                        <TextField
+                        onChange={(e)=>{setName(e.target.value)}}      
+                        value={name}
+                        id="name"
+                        label="Nom et prenom"
+                        />
+                        <TextField
+                        onChange={(e)=>{setEmail(e.target.value)}}      
+                        value={email}
+                        id="email"
+                        label="Email"
+                        type="email"
+                        />
+                        <TextField
+                        onChange={(e)=>{setDatenaissance(e.target.value)}}      
+                        value={datenaissance}
+                        id="datenaissance"
+                        label=""
+                        type="date"
+                        />
+                        <div className='btn-del'>
+                            <Button className='btn-ajout'  onClick={save} variant="outlined" type='submit' size="large">Add</Button>
+                            <Button className='btn-ajout'  onClick={updateData} variant="outlined" type='submit' size="large">Update</Button>
+                        </div>
+                        
+                    </Box>
                 </Typography>
                 </Box>
             </Modal>
@@ -143,7 +230,7 @@ function Manager() {
                                             <TableCell className={classes.Cell}>{row.name}</TableCell>
                                             <TableCell className={classes.Cell}>{row.datenaissance}</TableCell>
                                             <TableCell className={classes.Cell} align="right">
-                                            {status?.type === 'delete' && <DeleteIcon  onClick={()=>confirmationdelete()} />}
+                                            {status?.type === 'delete' && <DeleteIcon  onClick={()=>confirmationdelete(row._id)} />}
                                             {status?.type === 'confirm' && (
                                                 <Modal
                                                     open={DOpen}
@@ -160,12 +247,12 @@ function Manager() {
                                                         </div>
                                                         <div className='btn-del'>
                                                             <Button className='annul' onClick={deleteClose}>Annuler</Button>
-                                                            <Button className='del'  onClick={deleteClose}>Confirmer</Button>
+                                                            <Button className='del'  onClick={()=>deleteRow(row._id)}>Confirmer</Button>
                                                         </div>
                                                     </Box>
                                                 </Modal>
                                             )}
-                                            <EditIcon />
+                                            <EditIcon onClick={() => getManagerById(row._id)} />
                                             </TableCell>
                                         </TableRow>
                                     ))}
@@ -174,7 +261,6 @@ function Manager() {
                         </TableContainer >
                     </Paper>
                 </div>
-
             </div>
         </div>
         

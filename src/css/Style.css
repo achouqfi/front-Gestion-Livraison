@@ -214,7 +214,7 @@ body {
   font-size: larger !important;
   color: #003f5c !important;
   font-weight: bold !important;
-  margin: 3% 2% 3% 62% !important;
+  margin: 3% 2% 3% 2% !important;
 }
 
 .header-btn{
@@ -223,6 +223,10 @@ body {
   border-bottom: 1px solid !important;
 }
 
+.btn-del{
+  display: flex;
+}
+/* 
 .add-success{
   color: green;
   font-size: small;
@@ -233,7 +237,7 @@ body {
   color: rgb(255, 0, 0);
   font-size: 18px;
   font-weight: bold;
-}
+} */
 
 .del{
   border: #ff0000 1px solid !important;
@@ -245,6 +249,7 @@ body {
   color: #ffffff !important;
   background-color: red !important;
   font-weight: bold !important;
+  margin-left: 4% !important;
 }
 
 .annul{
@@ -259,5 +264,6 @@ body {
 }
 
 .btn-del{
-  margin: 1% 3% 1% 34% !important;
+  margin: 7% 3% 1% 32% !important;
+  height: 36px;
 }
