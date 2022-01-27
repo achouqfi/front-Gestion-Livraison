@@ -14,16 +14,20 @@ import Prime from './Pages/Primes';
 import Login from './Pages/Login';
 
 function App() {
-
+  const [path, setPath] = useState({ url: 'dashboard' });
+  useEffect(() => {
+    if(window.location.pathname === '/login'){
+      setPath({ url: window.location.pathname })
+    }
+  }, [])
+  
   return (
     <div>
       <Router>
-          <Route exact path="/login"  component={Login} />
-      </Router>
-      <Router>
+      {path?.url === '/login' && <Route exact path="/login"  component={Login} />}
         <div className="App">
             <div className="d-flex align-items-stretch">
-            <SideBar />
+            {path?.url === 'dashboard' && <SideBar /> }
               <div className="page-holder bg-gray-100">
                  <Route exact path="/" component={Home} />
                 <Route exact path="/manager" component={Manager} />

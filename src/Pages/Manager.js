@@ -113,6 +113,8 @@ function Manager() {
                 console.log(res);
                 setDOpen(false)
                 getdata()
+                setStatus({ type: 'delete' });
+
             })
             .catch(err=>{
                 console.log(err)
