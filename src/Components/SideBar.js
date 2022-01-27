@@ -57,9 +57,9 @@ export default class SideBar extends Component {
                             <NavLink exact to="/prime" activeClassName="activeClicked">
                                 <CDBSidebarMenuItem ><span className="sideIcon"><BiMoney/></span>Prime</CDBSidebarMenuItem>
                             </NavLink>
-                            <NavLink exact to="/historique" activeClassName="activeClicked">
+                            {/* <NavLink exact to="/historique" activeClassName="activeClicked">
                                 <CDBSidebarMenuItem ><span className="sideIcon"><FaHistory/></span>Historique</CDBSidebarMenuItem>
-                            </NavLink>                            
+                            </NavLink>*/}
                         </CDBSidebarMenu>
                     </CDBSidebarContent>
                 </CDBSidebar>

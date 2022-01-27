@@ -53,12 +53,13 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
   
-const Cells = ["id","email","name", "date de naissance"]
+const Cells = ["id","email","name", "date de naissance","actions"]
   
 function Manager() {
     const [open, setOpen] = React.useState(false);
     const [DOpen, setDOpen] = React.useState(false);
     const [status, setStatus] = useState({ type: 'delete' });
+    const [btnAdd, setbtnAdd] = useState({ type: 'add' });
     const handleOpen = () => setOpen(true);
     const handleClose = () => (setOpen(false),
         setStatus({ type: 'delete' }));
@@ -112,7 +113,6 @@ function Manager() {
                 console.log(res);
                 setDOpen(false)
                 getdata()
-                setStatus({ type: 'delete' });
             })
             .catch(err=>{
                 console.log(err)
@@ -128,7 +128,8 @@ function Manager() {
                 setDatenaissance(element.datenaissance);
                 handleOpen()
                 setdataId(element._id)
-
+                setStatus({ type: 'delete' });
+                setbtnAdd({ type: 'update' });
             }))
             .catch(err=>console.log(err))
     }
@@ -141,6 +142,7 @@ function Manager() {
                 datenaissance:datenaissance
             })
             .then(res=>{
+                setbtnAdd({ type: 'add' });
                 getdata()
                 handleClose()
             })
@@ -201,8 +203,8 @@ function Manager() {
                         type="date"
                         />
                         <div className='btn-del'>
-                            <Button className='btn-ajout'  onClick={save} variant="outlined" type='submit' size="large">Add</Button>
-                            <Button className='btn-ajout'  onClick={updateData} variant="outlined" type='submit' size="large">Update</Button>
+                            {btnAdd?.type === 'add' && <Button className='btn-ajout'  onClick={save} variant="outlined" type='submit' size="large">Add</Button>}
+                            {btnAdd?.type === 'update' && <Button className='btn-ajout'  onClick={updateData} variant="outlined" type='submit' size="large">Update</Button>}
                         </div>
                         
                     </Box>

@@ -214,7 +214,7 @@ body {
   font-size: larger !important;
   color: #003f5c !important;
   font-weight: bold !important;
-  margin: 3% 2% 3% 2% !important;
+  margin: 3% 2% 3% 34% !important;
 }
 
 .header-btn{
@@ -226,18 +226,6 @@ body {
 .btn-del{
   display: flex;
 }
-/* 
-.add-success{
-  color: green;
-  font-size: small;
-  font-weight: bold;
-}
-
-.err-message{
-  color: rgb(255, 0, 0);
-  font-size: 18px;
-  font-weight: bold;
-} */
 
 .del{
   border: #ff0000 1px solid !important;
