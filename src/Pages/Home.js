@@ -60,7 +60,7 @@ export default function Home() {
                                 </div>
                                 <div className="descCommande">
                                     <h3>Res Livraison</h3>
-                                    <p>{countLivreur}</p>
+                                    <p>{countResLivraison}</p>
                                 </div>
                                 <div className="ellipse2" >
                                     <IoEllipseSharp />

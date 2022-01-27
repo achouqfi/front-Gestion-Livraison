@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
   
-const Cells = ["date depart","heure", "ville de depart", "ville d'arrive", "poids", "prix","distance","status", "nom de livreur", "actions"]
+const Cells = ["date depart","heure", "ville de depart", "ville d'arrive", "poids", "prix","distance","status","actions"]
   
 function Comande() {
     const classes = useStyles()
@@ -85,7 +85,7 @@ function Comande() {
                                             <TableCell className={classes.Cell}>{row.prix}</TableCell>
                                             <TableCell className={classes.Cell}>{row.distance_kilometrage} Km</TableCell>
                                             <TableCell className={classes.Cell}>{row.status}</TableCell>
-                                            <TableCell className={classes.Cell}>{row.chauffeur.name}</TableCell>
+                                            {/* <TableCell className={classes.Cell}>{row.chauffeur.name}</TableCell> */}
                                             <TableCell className={classes.Cell} align="right">
                                                 <DeleteIcon />
                                                 <EditIcon />

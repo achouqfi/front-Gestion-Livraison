@@ -81,10 +81,10 @@ export default function Livreurs() {
                                             <TableCell className={classes.Cell}>{row.camion._id}</TableCell>
                                             <TableCell className={classes.Cell}>{row.camion.immatriculation}</TableCell>
                                             <TableCell className={classes.Cell}>{row.camion.type}</TableCell>
-                                            {/* <TableCell className={classes.Cell} align="right">
+                                            <TableCell className={classes.Cell} align="right">
                                                 <DeleteIcon />
                                                 <EditIcon />
-                                            </TableCell> */}
+                                            </TableCell>
                                         </TableRow>
                                     ))}
 {/* 
