@@ -62,7 +62,7 @@ function Manager() {
     const [btnAdd, setbtnAdd] = useState({ type: 'add' });
     const handleOpen = () => setOpen(true);
     const handleClose = () => (setOpen(false),
-        setStatus({ type: 'delete' }));
+    setStatus({ type: 'delete' }));
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [datenaissance, setDatenaissance] = useState("");
@@ -136,7 +136,7 @@ function Manager() {
 
     function updateData(){
         axios
-            .put(`http://localhost:4000/api/manager//${dataId}`,{
+            .put(`http://localhost:4000/api/manager/${dataId}`,{
                 name:name,
                 email:email,
                 datenaissance:datenaissance
