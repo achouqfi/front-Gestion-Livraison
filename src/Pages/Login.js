@@ -1,27 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { Grid,Paper, Avatar, TextField, Button, Typography } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
+
 
 export default function Login() {
-    const [api, setApi]= useState({api:''})
+    const [api, setApi]= useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [cookies, setCookie] = useCookies(['user']);
+
 
     useEffect(() => {
         if(window.location.pathname === "/RouteManager"){
-            setApi({ api: "http://localhost:4000/api/manager/login" })
+            setApi("http://localhost:4000/api/manager/login" )
         }else if(window.location.pathname === "/admin"){
-            setApi({ api: "http://localhost:4000/api/admin/login" })
+            setApi("http://localhost:4000/api/adminG/login" )
         }else if(window.location.pathname === "/RouteLivreur"){
-            setApi({ api: "http://localhost:4000/api/chauffeur/login" })
+            setApi("http://localhost:4000/api/chauffeur/login")
         } 
     }, [])
     
     function login(){
-        console.log('ana f login');
+        axios
+            .post(api,{
+                email:email,
+                password:password
+            })
+            .then(res=>{
+                setCookie('token', res.data.token);
+                setCookie('role', res.data.role);
+                window.location='/'
+            })
+            .catch(err=>{
+                console.log(err);
+            })
     }
 
-    console.log(api);
+    console.log(cookies);
 
     const paperStyle={padding :20,height:'34vh',width:580, margin:"190px 30vw"}
     const avatarStyle={backgroundColor:'#003f5c'}
@@ -34,8 +51,19 @@ export default function Login() {
                      <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
                     <h2>Login In</h2>
                 </Grid>
-                <TextField label='Email' placeholder='Enter email' fullWidth required/>
-                <TextField label='Password' placeholder='Enter password' type='password' fullWidth required/>
+                <TextField 
+                    label='Email' 
+                    placeholder='Enter email' 
+                    onChange={(e)=>{setEmail(e.target.value)}}      
+                    fullWidth 
+                    required/>
+                <TextField 
+                    label='Password' 
+                    placeholder='Enter password' 
+                    onChange={(e)=>{setPassword(e.target.value)}}      
+                    type='password' 
+                    fullWidth 
+                    required/>
                 <Button type='submit' onClick={(e)=>login()} color='primary' variant="contained" style={btnstyle} fullWidth>Login</Button>
                 <Typography >
                     Authentifiez vous

@@ -105,7 +105,6 @@ function Manager() {
     }
 
     function deleteRow() {
-        console.log(dataId);
         axios
             .delete(`http://localhost:4000/api/manager/${dataId}`)
             .then(res=>{
