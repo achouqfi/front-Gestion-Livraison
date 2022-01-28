@@ -28,16 +28,10 @@ function App() {
   return (
     <div>
       <Router>
-        <div className="App">
-            <div className="d-flex align-items-stretch">
-              <div className="page-holder bg-gray-100">
-              {path?.url === '/admin' && <Route exact path="/admin"  component={Login} />}
-              {path?.url === '/RouteManager' && <Route exact path="/RouteManager"  component={Login} />}
-              {path?.url === '/RouteLivreur' && <Route exact path="/RouteLivreur"  component={Login} />}
-              {path?.url === '/RouteResLivraison' && <Route exact path="/RouteResLivraison"  component={Login} />}
-              </div>
-            </div> 
-        </div>
+          {path?.url === '/admin' && <Route exact path="/admin"  component={Login} />}
+          {path?.url === '/RouteManager' && <Route exact path="/RouteManager"  component={Login} />}
+          {path?.url === '/RouteLivreur' && <Route exact path="/RouteLivreur"  component={Login} />}
+          {path?.url === '/RouteResLivraison' && <Route exact path="/RouteResLivraison"  component={Login} />}
       </Router>
       {cookies?.role === 'adminG' && (
           <Router>
