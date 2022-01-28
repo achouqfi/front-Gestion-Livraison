@@ -66,7 +66,6 @@ function Manager() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [datenaissance, setDatenaissance] = useState("");
-    // const deleteOpen = () => setDOpen(true);
     const deleteClose = () => (setDOpen(false),setStatus({ type: 'delete' }));
     const [dataId,setdataId]=useState(null)
     const [data , setData] = useState([]);

@@ -16,7 +16,7 @@ import Login from './Pages/Login';
 function App() {
   const [path, setPath] = useState({ url: 'dashboard' });
   useEffect(() => {
-    if(window.location.pathname === '/login'){
+    if(window.location.pathname === '/RouteManager' || window.location.pathname === '/admin' || window.location.pathname === '/RouteLivreur' ||window.location.pathname === '/RouteResLivraison'  ){
       setPath({ url: window.location.pathname })
     }
   }, [])
@@ -24,11 +24,14 @@ function App() {
   return (
     <div>
       <Router>
-      {path?.url === '/login' && <Route exact path="/login"  component={Login} />}
         <div className="App">
             <div className="d-flex align-items-stretch">
             {path?.url === 'dashboard' && <SideBar /> }
               <div className="page-holder bg-gray-100">
+              {path?.url === '/admin' && <Route exact path="/admin"  component={Login} />}
+              {path?.url === '/RouteManager' && <Route exact path="/RouteManager"  component={Login} />}
+              {path?.url === '/RouteLivreur' && <Route exact path="/RouteLivreur"  component={Login} />}
+              {path?.url === '/RouteResLivraison' && <Route exact path="/RouteResLivraison"  component={Login} />}
                  <Route exact path="/" component={Home} />
                 <Route exact path="/manager" component={Manager} />
                 <Route exact path="/commande" component={Commande} />
