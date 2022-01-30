@@ -9,7 +9,7 @@ export default function Login() {
     const [api, setApi]= useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [cookies, setCookie] = useCookies(['user']);
+    const [cookies, setCookie,] = useCookies(['user']);
 
 
     useEffect(() => {
@@ -31,7 +31,15 @@ export default function Login() {
             .then(res=>{
                 setCookie('token', res.data.token);
                 setCookie('role', res.data.role);
-                window.location='/'
+                // if (cookies.role === 'adminG') {
+                    window.location="/"
+                // }else if(cookies.role === 'manager') {
+                //     window.location="/reslivraison"
+                // }else if(cookies.role === 'resLivraison'){
+                //     window.location="/livreur"
+                // }else if(cookies.role === 'livreur'){
+                //     window.location="/commande"
+                // }
             })
             .catch(err=>{
                 console.log(err);

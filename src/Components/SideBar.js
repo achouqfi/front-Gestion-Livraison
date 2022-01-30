@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { RiHome8Fill,RiStore2Fill,RiMessage2Fill,RiShoppingCart2Fill } from "react-icons/ri";
+import { RiHome8Fill } from "react-icons/ri";
 import { IoPeopleSharp } from "react-icons/io5";
-import { VscFeedback } from "react-icons/vsc";
-import { FaHistory } from "react-icons/fa";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { AiFillCar } from "react-icons/ai";
 import {BiMoney} from 'react-icons/bi';
 import {GiStorkDelivery} from 'react-icons/gi';
 import '../Css/Style.css'
+import { useCookies } from "react-cookie";
+// import { useHistory } from 'react-router-dom';
 import {
     CDBSidebar,
     CDBSidebarContent,
@@ -16,10 +17,30 @@ import {
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
 
-export default class SideBar extends Component {
+export default function SideBar(){
+    const [cookies, setCookie,removeCookie] = useCookies();
+    // const history = useHistory();
 
+    function logout(){
+        if (cookies.role === 'adminG') {
+            removeCookie('role');
+            window.location="/admin"
+            // history.push('/admin')
+        }else if(cookies.role === 'manager') {
+            removeCookie('role');
+            window.location="/RouteManager"
+            // history.push('/RouteManager')
+        }else if(cookies.role === 'resLivraison'){
+            removeCookie('role');
+            window.location="/RouteLivreur"
+            // history.push('/RouteLivreur')
+        }else if(cookies.role === 'resLivraison'){
+            removeCookie('role');
+            window.location="/RouteResLivraison"
+            // history.push('/RouteResLivraison')
+        }
+    }
 
-    render() {
         return (
             <div
                 style={{ display: 'flex', overflow: 'scroll initial', height:'100vh' }}
@@ -35,10 +56,11 @@ export default class SideBar extends Component {
                         </a>
                     </CDBSidebarHeader>
                     <CDBSidebarContent className="sidebar-content">
-                        <CDBSidebarMenu>
+                        <CDBSidebarMenu>              
                             <NavLink exact to="/" activeClassName="activeClicked" >
-                                <CDBSidebarMenuItem ><span className="sideIcon"><RiHome8Fill/></span>Home</CDBSidebarMenuItem>
+                                {cookies?.role === 'adminG' && ( <CDBSidebarMenuItem ><span className="sideIcon"><RiHome8Fill/></span>Home</CDBSidebarMenuItem>)}
                             </NavLink>
+
                             <NavLink exact to="/commande" activeClassName="activeClicked">
                                 <CDBSidebarMenuItem><span className="sideIcon"><GiStorkDelivery/></span>Commandes</CDBSidebarMenuItem>
                             </NavLink>
@@ -46,7 +68,7 @@ export default class SideBar extends Component {
                                 <CDBSidebarMenuItem><span className="sideIcon"><IoPeopleSharp/></span>Livreurs</CDBSidebarMenuItem>
                             </NavLink>
                             <NavLink exact to="/manager" activeClassName="activeClicked">
-                                <CDBSidebarMenuItem><span className="sideIcon"><IoPeopleSharp/></span>Managers</CDBSidebarMenuItem>
+                                {cookies?.role === 'adminG' && (<CDBSidebarMenuItem><span className="sideIcon"><IoPeopleSharp/></span>Managers</CDBSidebarMenuItem>)}
                             </NavLink>
                             <NavLink exact to="/reslivraison" activeClassName="activeClicked">
                                 <CDBSidebarMenuItem><span className="sideIcon"><IoPeopleSharp/></span>Responsabe de livraison</CDBSidebarMenuItem>
@@ -56,15 +78,12 @@ export default class SideBar extends Component {
                             </NavLink>
                             <NavLink exact to="/prime" activeClassName="activeClicked">
                                 <CDBSidebarMenuItem ><span className="sideIcon"><BiMoney/></span>Prime</CDBSidebarMenuItem>
-                            </NavLink>
-                            {/* <NavLink exact to="/historique" activeClassName="activeClicked">
-                                <CDBSidebarMenuItem ><span className="sideIcon"><FaHistory/></span>Historique</CDBSidebarMenuItem>
-                            </NavLink>*/}
+                            </NavLink  >
+                            <CDBSidebarMenuItem onClick={(e)=>logout()} ><span  className="sideIcon"><ExitToAppIcon/></span>Logout</CDBSidebarMenuItem>
                         </CDBSidebarMenu>
                     </CDBSidebarContent>
                 </CDBSidebar>
             </div>
         )
-    }
 }
 
