@@ -17,6 +17,8 @@ import '../Css/Style.css'
 import Wrapper from '../Components/Wrapper';
 import TextField from '@mui/material/TextField';
 import CancelIcon from '@mui/icons-material/Cancel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 import axios from "axios"
 import SearchBar from '../Components/Form'
 
@@ -57,19 +59,23 @@ function Livreur() {
     const [status, setStatus] = useState({ type: 'delete' });
     const [btnAdd, setbtnAdd] = useState({ type: 'add' });
     const handleOpen = () => setOpen(true);
-    const handleClose = () => (setOpen(false),
-    setStatus({ type: 'delete' }));
+    const handleClose = () => (setOpen(false),setStatus({ type: 'delete' }));
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [Vehicule, setVehicule] = useState("");
     const deleteClose = () => (setDOpen(false),setStatus({ type: 'delete' }));
     const [dataId,setdataId]=useState(null)
     const [data , setData] = useState([]);
+    const [dataV, setDataV] = useState("")
     const classes = useStyles()
 
     useEffect(() => {
         getdata();
     }, [])
+
+    useEffect(() => {
+        getvehicule();
+    }, [""])
     
     function confirmationdelete(id){
         setStatus({ type: 'confirm' });
@@ -84,12 +90,19 @@ function Livreur() {
         })
     }
 
+    function getvehicule(){
+        axios("http://localhost:4000/api/camion/")
+        .then((result)=> {
+            setDataV(result.data);
+        })
+    }
+
     function save(){
         axios
             .post(`http://localhost:4000/api/chauffeur/add`,{
                 name:name,
                 email:email,
-                datenaissance:Vehicule
+                camion:Vehicule
             })
             .then(res=>{
                 getdata()
@@ -100,6 +113,7 @@ function Livreur() {
             })
     }
 
+    //delete row
     function deleteRow() {
         axios
             .delete(`http://localhost:4000/api/chauffeur/${dataId}`)
@@ -108,26 +122,21 @@ function Livreur() {
                 setDOpen(false)
                 getdata()
                 setStatus({ type: 'delete' });
-
             })
             .catch(err=>{
                 console.log(err)
             })
     }
 
-    function getManagerById(id){
-        axios
-            .get(`http://localhost:4000/api/chauffeur/get/${id}`)
-            .then(res=>res.data.forEach(element => {
-                setName(element.name)
-                setEmail(element.email)
-                Vehicule(element.Vehicule);
-                handleOpen()
-                setdataId(element._id)
-                setStatus({ type: 'delete' });
-                setbtnAdd({ type: 'update' });
-            }))
-            .catch(err=>console.log(err))
+    // //
+    function getById(id,name,email){
+        setName(name)
+        setEmail(email)
+        setVehicule(Vehicule);
+        handleOpen()
+        setdataId(id)
+        setStatus({ type: 'delete' });
+        setbtnAdd({ type: 'update' });
     }
 
     function updateData(){
@@ -135,7 +144,7 @@ function Livreur() {
             .put(`http://localhost:4000/api/chauffeur/${dataId}`,{
                 name:name,
                 email:email,
-                Vehicule:Vehicule
+                camion:Vehicule
             })
             .then(res=>{
                 setbtnAdd({ type: 'add' });
@@ -147,6 +156,7 @@ function Livreur() {
             })
     }
 
+    console.log(dataV);
     return (
         <div className="px-lg-4 px-xl-5 container-fluid">
             <Wrapper
@@ -191,15 +201,20 @@ function Livreur() {
                         label="Email"
                         type="email"
                         />
-                        <TextField
-                        onChange={(e)=>{setVehicule(e.target.value)}}      
+                        <Select
+                        labelId="demo-simple-select-label"
+                        label=""
                         value={Vehicule}
-                        id="type de Vehicule"
-                        label="Type"
-                        type="date"
-                        />
+                        onChange={(e)=>{dataV(e.target.value)}}      
+                        >
+                        {dataV.map((row, index) => (   
+                            <MenuItem value={row._id}>{row.immatriculation}</MenuItem>
+                        ))}
+
+
+                        </Select>
                         <div className='btn-del'>
-                            {btnAdd?.type === 'add' && <Button className='btn-ajout'  onClick={save} variant="outlined" type='submit' size="large">Add</Button>}
+                            {btnAdd?.type === 'add' && <Button className='btn-ajout'  onClick={save} id='addhh'  variant="outlined" type='submit' size="large">Add</Button>}
                             {btnAdd?.type === 'update' && <Button className='btn-ajout'  onClick={updateData} variant="outlined" type='submit' size="large">Update</Button>}
                         </div>
                         
@@ -251,7 +266,7 @@ function Livreur() {
                                                     </Box>
                                                 </Modal>
                                             )}
-                                            <EditIcon onClick={() => getManagerById(row._id)} />
+                                            <EditIcon onClick={() => getById(row._id,row.name,row.email )} />
                                             </TableCell>
                                         </TableRow>
                                     ))}
