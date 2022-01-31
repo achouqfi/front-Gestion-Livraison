@@ -25,7 +25,6 @@ export default function ResLivraisons() {
                     <Route exact path="/commande" component={Commande} />
                     <Route exact path="/vehicule" component={Vehicule} />
                     <Route exact path="/livreur" component={Livreur} />
-                    <Route exact path="/reslivraison" component={ResLivraison} />
                     <Route exact path="/prime" component={Prime} /> 
                   </div>
                 </div> 

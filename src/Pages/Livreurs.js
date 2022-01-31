@@ -71,11 +71,8 @@ function Livreur() {
 
     useEffect(() => {
         getdata();
+        getvehicule()
     }, [])
-
-    useEffect(() => {
-        getvehicule();
-    }, [""])
     
     function confirmationdelete(id){
         setStatus({ type: 'confirm' });
@@ -118,7 +115,6 @@ function Livreur() {
         axios
             .delete(`http://localhost:4000/api/chauffeur/${dataId}`)
             .then(res=>{
-                console.log(res);
                 setDOpen(false)
                 getdata()
                 setStatus({ type: 'delete' });
@@ -128,7 +124,6 @@ function Livreur() {
             })
     }
 
-    // //
     function getById(id,name,email){
         setName(name)
         setEmail(email)
@@ -205,13 +200,11 @@ function Livreur() {
                         labelId="demo-simple-select-label"
                         label=""
                         value={Vehicule}
-                        onChange={(e)=>{dataV(e.target.value)}}      
-                        >
-                        {dataV.map((row, index) => (   
+                        onChange={(e)=>{setVehicule(e.target.value)}}      
+                        >      
+                        {/* {dataV.map((row, index) => (   
                             <MenuItem value={row._id}>{row.immatriculation}</MenuItem>
-                        ))}
-
-
+                        ))} */}
                         </Select>
                         <div className='btn-del'>
                             {btnAdd?.type === 'add' && <Button className='btn-ajout'  onClick={save} id='addhh'  variant="outlined" type='submit' size="large">Add</Button>}

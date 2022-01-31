@@ -30,7 +30,7 @@ export default function SideBar(){
             removeCookie('role');
             window.location="/RouteManager"
             // history.push('/RouteManager')
-        }else if(cookies.role === 'resLivraison'){
+        }else if(cookies.role === 'livreur'){
             removeCookie('role');
             window.location="/RouteLivreur"
             // history.push('/RouteLivreur')
@@ -71,7 +71,8 @@ export default function SideBar(){
                                 {cookies?.role === 'adminG' && (<CDBSidebarMenuItem><span className="sideIcon"><IoPeopleSharp/></span>Managers</CDBSidebarMenuItem>)}
                             </NavLink>
                             <NavLink exact to="/reslivraison" activeClassName="activeClicked">
-                                <CDBSidebarMenuItem><span className="sideIcon"><IoPeopleSharp/></span>Responsabe de livraison</CDBSidebarMenuItem>
+                            {cookies?.role === 'adminG' && (<CDBSidebarMenuItem><span className="sideIcon"><IoPeopleSharp/></span>Responsabe de livraison</CDBSidebarMenuItem>)}
+                                
                             </NavLink>
                             <NavLink exact to="/vehicule" activeClassName="activeClicked">
                                 <CDBSidebarMenuItem ><span className="sideIcon"><AiFillCar/></span>Vehicule</CDBSidebarMenuItem>

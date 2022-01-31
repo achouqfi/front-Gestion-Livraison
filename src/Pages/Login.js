@@ -19,6 +19,8 @@ export default function Login() {
             setApi("http://localhost:4000/api/adminG/login" )
         }else if(window.location.pathname === "/RouteLivreur"){
             setApi("http://localhost:4000/api/chauffeur/login")
+        }else if(window.location.pathname === "/RouteResLivraison"){
+            setApi("http://localhost:4000/api/ResLivraison/login")
         } 
     }, [])
     
@@ -31,6 +33,7 @@ export default function Login() {
             .then(res=>{
                 setCookie('token', res.data.token);
                 setCookie('role', res.data.role);
+                setCookie('id_livreur', res.data.id_livreur)
                 // if (cookies.role === 'adminG') {
                     window.location="/"
                 // }else if(cookies.role === 'manager') {
