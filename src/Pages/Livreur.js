@@ -13,8 +13,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import '../Css/Style.css'
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
+import { useCookies } from 'react-cookie';
 import axios from "axios"
 import SearchBar from '../Components/Form'
 
@@ -53,26 +52,36 @@ const CellsPrime = ["prix de livraison","mois", "distance","status de livraison"
 function Livreur() {
     const [data , setData] = useState([]);
     const [prime , setprime] = useState([]);
+    const [livreur , setLivreur] = useState([]);
+    const [cookies, setCookie] = useCookies(['user']);
     const classes = useStyles()
 
     useEffect(() => {
         getdata();
     }, [])
-    
 
+    let livreur_id = cookies.id_livreur;
+    
     function getdata() {
         axios("http://localhost:4000/api/commande/")
         .then((result)=> {
             setData(result.data)
+        })  
+
+        axios(`http://localhost:4000/api/chauffeur/${livreur_id}`)
+        .then((result)=> {
+            console.log(result.data);
+            result.data.forEach(element => {
+
+            });
         })
 
         axios("http://localhost:4000/api/prime/")
         .then((result)=> {
             setprime(result.data)
         })
-
     }
-
+    
     return (
         <div className="px-lg-4 px-xl-5 container-fluid">
             <SearchBar 
@@ -82,6 +91,7 @@ function Livreur() {
 
             <div className="card-table mb-4 card">
                 <div className="card-body">
+                                
                 <div className='btn-container'>
                 </div>
                     <Paper>
