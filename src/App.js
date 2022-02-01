@@ -15,7 +15,7 @@ function App() {
   const [cookies, setCookie] = useCookies();
   const [path, setPath] = useState({ url: 'dashboard' });
   useEffect(() => {
-    if(window.location.pathname === '/RouteManager' || window.location.pathname === '/admin' || window.location.pathname === '/RouteLivreur' ||window.location.pathname === '/RouteResLivraison'  ){
+    if(window.location.pathname === '/admin/auth' || window.location.pathname === '/manager/auth' || window.location.pathname === '/livreur/auth' ||window.location.pathname === '/resLivraison/auth'  ){
       setPath({ url: window.location.pathname })
     }
   }, [])
@@ -23,10 +23,10 @@ function App() {
   return (
     <div>
       <Router>
-          {path?.url === '/admin' && <Route exact path="/admin"  component={Login} />}
-          {path?.url === '/RouteManager' && <Route exact path="/RouteManager"  component={Login} />}
-          {path?.url === '/RouteLivreur' && <Route exact path="/RouteLivreur"  component={Login} />}
-          {path?.url === '/RouteResLivraison' && <Route exact path="/RouteResLivraison"  component={Login} />}
+          {path?.url === '/admin/auth' && <Route exact path="/admin/auth"  component={Login} />}
+          {path?.url === '/manager/auth' && <Route exact path="/manager/auth"  component={Login} />}
+          {path?.url === '/livreur/auth' && <Route exact path="/livreur/auth"  component={Login} />}
+          {path?.url === '/resLivraison/auth' && <Route exact path="/resLivraison/auth"  component={Login} />}
       </Router>
       <AdminRoutes />
       <ManagerRoutes />

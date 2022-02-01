@@ -13,13 +13,13 @@ export default function Login() {
 
 
     useEffect(() => {
-        if(window.location.pathname === "/RouteManager"){
+        if(window.location.pathname === "/manager/auth"){
             setApi("http://localhost:4000/api/manager/login" )
-        }else if(window.location.pathname === "/admin"){
+        }else if(window.location.pathname === "/admin/auth"){
             setApi("http://localhost:4000/api/adminG/login" )
-        }else if(window.location.pathname === "/RouteLivreur"){
+        }else if(window.location.pathname === "/livreur/auth"){
             setApi("http://localhost:4000/api/chauffeur/login")
-        }else if(window.location.pathname === "/RouteResLivraison"){
+        }else if(window.location.pathname === "/resLivraison/auth"){
             setApi("http://localhost:4000/api/ResLivraison/login")
         } 
     }, [])
@@ -34,15 +34,15 @@ export default function Login() {
                 setCookie('token', res.data.token);
                 setCookie('role', res.data.role);
                 setCookie('id_livreur', res.data.id_livreur)
-                // if (cookies.role === 'adminG') {
+                if (res.data.role === 'adminG') {
                     window.location="/"
-                // }else if(cookies.role === 'manager') {
-                //     window.location="/reslivraison"
-                // }else if(cookies.role === 'resLivraison'){
-                //     window.location="/livreur"
-                // }else if(cookies.role === 'livreur'){
-                //     window.location="/commande"
-                // }
+                }else if(res.data.role === 'manager') {
+                    window.location="/reslivraison"
+                }else if(res.data.role === 'resLivraison'){
+                    window.location="/livreur"
+                }else if(res.data.role === 'livreur'){
+                    window.location="/livreur"
+                }
             })
             .catch(err=>{
                 console.log(err);

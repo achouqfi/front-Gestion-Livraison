@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 }));
   
 const Cells = ["date depart","heure", "ville de depart", "ville d'arrive", "poids", "prix","distance","status","actions"]
-const CellsPrime = ["prix de livraison","mois", "distance","status de livraison"]
+const CellsPrime = ["prix de livraison","mois", "distance","id de livreur","status de livraison"]
 function Livreur() {
     const [data , setData] = useState([]);
     const [prime , setprime] = useState([]);
@@ -63,17 +63,16 @@ function Livreur() {
     let livreur_id = cookies.id_livreur;
     
     function getdata() {
+        axios(`http://localhost:4000/api/chauffeur/${livreur_id}`)
+        .then((result)=> {
+            result.data.forEach(element => {
+                setLivreur(element);
+            });
+        })
+        
         axios("http://localhost:4000/api/commande/")
         .then((result)=> {
             setData(result.data)
-        })  
-
-        axios(`http://localhost:4000/api/chauffeur/${livreur_id}`)
-        .then((result)=> {
-            console.log(result.data);
-            result.data.forEach(element => {
-
-            });
         })
 
         axios("http://localhost:4000/api/prime/")
@@ -81,6 +80,7 @@ function Livreur() {
             setprime(result.data)
         })
     }
+console.log(livreur.camion);
     
     return (
         <div className="px-lg-4 px-xl-5 container-fluid">
@@ -90,8 +90,7 @@ function Livreur() {
             />
 
             <div className="card-table mb-4 card">
-                <div className="card-body">
-                                
+                <div className="card-body">             
                 <div className='btn-container'>
                 </div>
                     <Paper>
@@ -137,6 +136,7 @@ function Livreur() {
                                     <TableCell className={classes.Cell}>{row.livraison_prix} Dh</TableCell>
                                     <TableCell className={classes.Cell}>{row.mois}</TableCell>
                                     <TableCell className={classes.Cell}>{row.livraison.distance_kilometrage} km</TableCell>
+                                    <TableCell className={classes.Cell}>{row.livraison.chauffeur}</TableCell>
                                     <TableCell className={classes.Cell}>{row.livraison.status}</TableCell>
                                 </TableRow>
                             ))}
